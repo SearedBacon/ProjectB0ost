@@ -4,12 +4,18 @@ class_name Player
 @export var thrust:=1000.0
 @export var torque:=100.0
 var transitioning:=false
-
+@onready var death: AudioStreamPlayer = $Death
+@onready var success: AudioStreamPlayer = $Success
+@onready var rocket_audio: AudioStreamPlayer3D = $RockerAudio
 
 func _process(delta: float) -> void:
 	if !transitioning:
 		if Input.is_action_pressed("boost"):
 			apply_central_force(basis.y*delta*thrust)
+			if not rocket_audio.is_playing():
+				rocket_audio.play()
+		else:
+			rocket_audio.stop()
 		if Input.is_action_pressed("rotate_left"):
 			apply_torque(Vector3(0.0,0.0,delta*torque))
 		if Input.is_action_pressed("rotate_right"):
@@ -28,6 +34,7 @@ func _on_body_entered(body: Node) -> void:
 		crash_sequence()
 
 func crash_sequence()->void:
+	death.play()
 	print("KABOOM")
 	transitioning=true
 	await get_tree().create_timer(1).timeout
@@ -35,6 +42,7 @@ func crash_sequence()->void:
 	get_tree().reload_current_scene.call_deferred()
 	
 func level_complete(next_level_file)->void:
+	success.play()
 	if transitioning==false:
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file(next_level_file)

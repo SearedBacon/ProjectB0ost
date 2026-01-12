@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://habfhdya7smn"]
+[gd_scene load_steps=10 format=3 uid="uid://habfhdya7smn"]
 
 [ext_resource type="Script" uid="uid://bs3h1jc2ohxfv" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="AudioStream" uid="uid://4kkyi2c4npgd" path="res://assets/SFX - Death Explosion.ogg" id="2_gwnis"]
+[ext_resource type="AudioStream" uid="uid://i2fw7r27uas0" path="res://assets/SFX - Success.ogg" id="3_k53q1"]
+[ext_resource type="AudioStream" uid="uid://b8wtij3ox4uln" path="res://assets/SFX - Main engine thrust.ogg" id="4_fhl08"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hvfyp"]
 
@@ -37,5 +40,14 @@ mesh = SubResource("SphereMesh_4ntmi")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9746727, 0)
 shape = SubResource("SphereShape3D_l8h54")
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gwnis")
+
+[node name="Success" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_k53q1")
+
+[node name="RocketAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_fhl08")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
