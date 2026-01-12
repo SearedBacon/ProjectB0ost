@@ -3,14 +3,17 @@ class_name Player
 
 @export var thrust:=1000.0
 @export var torque:=100.0
+var transitioning:=false
+
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("boost"):
-		apply_central_force(basis.y*delta*thrust)
-	if Input.is_action_pressed("rotate_left"):
-		apply_torque(Vector3(0.0,0.0,delta*torque))
-	if Input.is_action_pressed("rotate_right"):
-		apply_torque(Vector3(0.0,0.0,-delta*torque))
+	if !transitioning:
+		if Input.is_action_pressed("boost"):
+			apply_central_force(basis.y*delta*thrust)
+		if Input.is_action_pressed("rotate_left"):
+			apply_torque(Vector3(0.0,0.0,delta*torque))
+		if Input.is_action_pressed("rotate_right"):
+			apply_torque(Vector3(0.0,0.0,-delta*torque))
 
 
 func _on_body_entered(body: Node) -> void:
@@ -26,8 +29,13 @@ func _on_body_entered(body: Node) -> void:
 
 func crash_sequence()->void:
 	print("KABOOM")
-	await get_tree().create_timer(2.5).timeout
+	transitioning=true
+	await get_tree().create_timer(1).timeout
+	transitioning=false
 	get_tree().reload_current_scene.call_deferred()
 	
 func level_complete(next_level_file)->void:
-	get_tree().change_scene_to_file(next_level_file)
+	if transitioning==false:
+		await get_tree().create_timer(1).timeout
+		get_tree().change_scene_to_file(next_level_file)
+		transitioning=false
