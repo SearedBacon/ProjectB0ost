@@ -10,6 +10,8 @@ var transitioning:=false
 @onready var main_booster: GPUParticles3D = $MainBooster
 @onready var right_turn: GPUParticles3D = $RightTurn
 @onready var left_turn: GPUParticles3D = $LeftTurn
+@onready var success_particles: GPUParticles3D = $SuccessParticles
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
 var yes:=0
 
 func _process(delta: float) -> void:
@@ -44,6 +46,8 @@ func _on_body_entered(body: Node) -> void:
 			main_booster.emitting=false
 			right_turn.emitting=false
 			left_turn.emitting=false
+			if yes==0:
+				success_particles.emitting=true
 			level_complete(body.file_path)
 		else:
 			print("No next level found!")
@@ -53,6 +57,8 @@ func _on_body_entered(body: Node) -> void:
 		main_booster.emitting=false
 		right_turn.emitting=false
 		left_turn.emitting=false
+		if yes==0:
+			explosion_particles.emitting=true
 		crash_sequence()
 
 func crash_sequence()->void:

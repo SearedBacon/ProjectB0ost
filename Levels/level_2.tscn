@@ -31,7 +31,7 @@ albedo_color = Color(0.14733335, 0.68, 0, 1)
 [node name="Level" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.88752276, -0.4591191, 0.038896717, 0.3465589, -0.6095268, 0.7130035, -0.3036449, 0.64628685, 0.7000807, 0, 5.3435655, 8.686989)
+transform = Transform3D(-0.8875228, -0.4591191, 0.038896732, 0.061210684, -0.03381337, 0.997552, -0.45667997, 0.887731, 0.058113124, 0, 9.433979, -0.22155452)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
