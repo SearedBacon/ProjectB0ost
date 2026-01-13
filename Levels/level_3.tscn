@@ -51,7 +51,7 @@ size = Vector3(3, 6, 5)
 material = SubResource("StandardMaterial3D_yfk6w")
 
 [node name="Floaty" type="CSGBox3D" parent="." groups=["Bad"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 216.31627, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 217, 0)
 size = Vector3(3, 427.125, 5)
 material = SubResource("StandardMaterial3D_5lru4")
 
@@ -67,7 +67,7 @@ use_collision = true
 size = Vector3(2.5, 0.4, 2.5)
 material = SubResource("StandardMaterial3D_s41d2")
 script = ExtResource("1_5lru4")
-file_path = "uid://yieuyihvkucn"
+file_path = "uid://d0up31sg5sfy3"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.94551855, 0.32556814, 0, -0.32556814, 0.94551855, 0, 5.305, 7.275)
