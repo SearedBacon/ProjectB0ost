@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://habfhdya7smn"]
+[gd_scene load_steps=24 format=3 uid="uid://habfhdya7smn"]
 
 [ext_resource type="Script" uid="uid://bs3h1jc2ohxfv" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="AudioStream" uid="uid://4kkyi2c4npgd" path="res://assets/SFX - Death Explosion.ogg" id="2_gwnis"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://assets/success_particles.tscn" id="6_vtle1"]
 [ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://assets/explosion_particles.tscn" id="7_od3ui"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_l8h54"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_vtle1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8h54"]
 
@@ -17,6 +17,7 @@ material = SubResource("StandardMaterial3D_l8h54")
 height = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l8h54"]
+radius = 0.37739506
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vtle1"]
 radius = 0.3
@@ -51,6 +52,27 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_od3ui"]
+radius = 0.54483855
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vtle1"]
+height = 1.0
+radius = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_od3ui"]
+height = 1.0
+radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5htga"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p5o4e"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
 [node name="Player" type="RigidBody3D"]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -62,14 +84,15 @@ angular_damp = 3.0
 script = ExtResource("1_l8h54")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_l8h54")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48486328, 0)
+shape = SubResource("SphereShape3D_vtle1")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18103921, 0)
 mesh = SubResource("SphereMesh_4ntmi")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9746727, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78557086, 0)
 shape = SubResource("SphereShape3D_l8h54")
 
 [node name="Death" type="AudioStreamPlayer" parent="."]
@@ -120,6 +143,24 @@ mesh = SubResource("CylinderMesh_00tjw")
 transform = Transform3D(0.69655174, -0.7175066, 0, 0.7175066, 0.69655174, 0, 0, 0, 1, 0.2939726, -0.73354924, 0)
 mesh = SubResource("CylinderMesh_apopc")
 
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30058762, 0)
+shape = SubResource("SphereShape3D_od3ui")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5164466, -0.5801178, 0)
+shape = SubResource("CylinderShape3D_vtle1")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5327505, -0.54122597, 0)
+shape = SubResource("CylinderShape3D_od3ui")
+
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51820874, -0.58097005, 0)
+mesh = SubResource("CylinderMesh_5htga")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5310629, -0.5406759, 0)
+mesh = SubResource("CylinderMesh_p5o4e")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

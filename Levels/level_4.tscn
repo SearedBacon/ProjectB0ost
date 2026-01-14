@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0up31sg5sfy3"]
+[gd_scene load_steps=11 format=3 uid="uid://d0up31sg5sfy3"]
 
 [ext_resource type="Script" uid="uid://gli40wmvb504" path="res://Levels/landing_pad.gd" id="1_e78ah"]
+[ext_resource type="PackedScene" uid="uid://pbw7rjasv4q" path="res://Levels/ui.tscn" id="1_ujo87"]
 [ext_resource type="PackedScene" uid="uid://habfhdya7smn" path="res://Player/player.tscn" id="2_nsqb1"]
 [ext_resource type="PackedScene" uid="uid://c7vphr0r6unpa" path="res://Levels/moving_obstacle.tscn" id="3_nsqb1"]
+[ext_resource type="PackedScene" uid="uid://ctoyiaswpjje4" path="res://Levels/floor.tscn" id="4_t60mx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_54b6e"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,9 +19,6 @@ sky = SubResource("Sky_s41d2")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfk6w"]
-albedo_color = Color(0.49, 0.17150001, 0, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54b6e"]
 albedo_color = Color(0, 0.1333332, 1, 1)
 
@@ -28,18 +27,14 @@ albedo_color = Color(0.14733335, 0.68, 0, 1)
 
 [node name="Level" type="Node3D"]
 
+[node name="UI" parent="." instance=ExtResource("1_ujo87")]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.88752276, -0.45911917, 0.038896706, 0.015840037, 0.05396583, 0.99841714, -0.46049154, 0.88673407, -0.040623438, -0.15868425, 8.315033, 0.36248016)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gtnvv")
-
-[node name="Floor" type="CSGBox3D" parent="." groups=["Bad"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-use_collision = true
-size = Vector3(30, 8, 5)
-material = SubResource("StandardMaterial3D_yfk6w")
 
 [node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.2, 0)
@@ -60,5 +55,9 @@ transform = Transform3D(1, 0, 0, 0, 0.94551855, 0.32556814, 0, -0.32556814, 0.94
 
 [node name="Player" parent="." instance=ExtResource("2_nsqb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.4195044, 0)
+starting_fuel = 150
 
 [node name="MovingObstacle" parent="." instance=ExtResource("3_nsqb1")]
+
+[node name="Floor2" parent="." instance=ExtResource("4_t60mx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.020446, 0)

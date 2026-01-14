@@ -1,23 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://yieuyihvkucn"]
+[gd_scene load_steps=7 format=3 uid="uid://yieuyihvkucn"]
 
 [ext_resource type="Script" uid="uid://gli40wmvb504" path="res://Levels/landing_pad.gd" id="1_gtnvv"]
 [ext_resource type="PackedScene" uid="uid://habfhdya7smn" path="res://Player/player.tscn" id="1_s41d2"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_54b6e"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_s41d2"]
-sky_material = SubResource("ProceduralSkyMaterial_54b6e")
-
-[sub_resource type="Environment" id="Environment_gtnvv"]
-background_mode = 2
-sky = SubResource("Sky_s41d2")
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfk6w"]
-albedo_color = Color(0.49, 0.17150001, 0, 1)
+[ext_resource type="PackedScene" uid="uid://ctoyiaswpjje4" path="res://Levels/floor.tscn" id="1_wav5q"]
+[ext_resource type="PackedScene" uid="uid://pbw7rjasv4q" path="res://Levels/ui.tscn" id="4_xto7t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54b6e"]
 albedo_color = Color(0, 0.1333332, 1, 1)
@@ -27,18 +13,10 @@ albedo_color = Color(0.14733335, 0.68, 0, 1)
 
 [node name="Level" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8875228, -0.45911917, 0.03889671, 0.020556867, 0.044878557, 0.998781, -0.46030504, 0.88724047, -0.030392705, 1.0550919, 7.0029745, 0.8442545)
-shadow_enabled = true
+[node name="UI" parent="." instance=ExtResource("4_xto7t")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_gtnvv")
-
-[node name="Floor" type="CSGBox3D" parent="." groups=["Bad"]]
+[node name="Floor" parent="." instance=ExtResource("1_wav5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-use_collision = true
-size = Vector3(30, 8, 5)
-material = SubResource("StandardMaterial3D_yfk6w")
 
 [node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.2, 0)
@@ -59,3 +37,4 @@ transform = Transform3D(1, 0, 0, 0, 0.94551855, 0.32556814, 0, -0.32556814, 0.94
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.4195044, 0)
+starting_fuel = 125

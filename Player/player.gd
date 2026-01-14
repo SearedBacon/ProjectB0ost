@@ -12,11 +12,22 @@ var transitioning:=false
 @onready var left_turn: GPUParticles3D = $LeftTurn
 @onready var success_particles: GPUParticles3D = $SuccessParticles
 @onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@export var starting_fuel:=100
 var yes:=0
+var ui: CanvasLayer
+var fuel:float:
+	set(new_fuel):
+		fuel=new_fuel
+		ui.update_fuel(new_fuel)
+		
+func _ready() -> void:
+	ui=get_tree().get_first_node_in_group("ui")
+	fuel=starting_fuel
 
 func _process(delta: float) -> void:
 	if !transitioning:
-		if Input.is_action_pressed("boost"):
+		if Input.is_action_pressed("boost")and fuel>0:
+			fuel-=1
 			main_booster.emitting=true
 			apply_central_force(basis.y*delta*thrust)
 			if not rocket_audio.is_playing():
@@ -27,15 +38,19 @@ func _process(delta: float) -> void:
 	
 		if Input.is_action_pressed("rotate_left"):
 			apply_torque(Vector3(0.0,0.0,delta*torque))
-			left_turn.emitting=true
-		else:
-			left_turn.emitting=false
-			
-		if Input.is_action_pressed("rotate_right"):
-			apply_torque(Vector3(0.0,0.0,-delta*torque))
+			if fuel>0:
+				fuel-=0.5
 			right_turn.emitting=true
 		else:
 			right_turn.emitting=false
+			
+		if Input.is_action_pressed("rotate_right"):
+			apply_torque(Vector3(0.0,0.0,-delta*torque))
+			if fuel>0:
+				fuel-=0.5
+			left_turn.emitting=true
+		else:
+			left_turn.emitting=false
 
 
 func _on_body_entered(body: Node) -> void:
