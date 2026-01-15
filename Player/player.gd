@@ -15,7 +15,7 @@ var transitioning:=false
 @export var starting_fuel:=100
 var yes:=0
 var ui: CanvasLayer
-var fuel:float:
+var fuel:int:
 	set(new_fuel):
 		fuel=new_fuel
 		ui.update_fuel(new_fuel)
@@ -37,18 +37,18 @@ func _process(delta: float) -> void:
 			main_booster.emitting=false
 	
 		if Input.is_action_pressed("rotate_left"):
-			apply_torque(Vector3(0.0,0.0,delta*torque))
-			if fuel>0:
+			if fuel>0.5:
+				apply_torque(Vector3(0.0,0.0,delta*torque))
 				fuel-=0.5
-			right_turn.emitting=true
+				right_turn.emitting=true
 		else:
 			right_turn.emitting=false
 			
 		if Input.is_action_pressed("rotate_right"):
-			apply_torque(Vector3(0.0,0.0,-delta*torque))
-			if fuel>0:
+			if fuel>0.5:
+				apply_torque(Vector3(0.0,0.0,-delta*torque))
 				fuel-=0.5
-			left_turn.emitting=true
+				left_turn.emitting=true
 		else:
 			left_turn.emitting=false
 

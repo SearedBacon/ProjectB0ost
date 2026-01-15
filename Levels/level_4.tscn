@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 0.94551855, 0.32556814, 0, -0.32556814, 0.94
 
 [node name="Player" parent="." instance=ExtResource("2_nsqb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.4195044, 0)
-starting_fuel = 150
+starting_fuel = 300
 
 [node name="MovingObstacle" parent="." instance=ExtResource("3_nsqb1")]
 
